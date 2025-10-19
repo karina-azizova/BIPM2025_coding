@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            color: #fff;
+            background-color: #000;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation - Minimal for personal page */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* General Section Styles */
+        section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay for readability */
+            z-index: 1;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('photo_2025-10-19 22.26.09.jpeg'); /* Use Almaty image as hero bg */
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+            letter-spacing: 0.05em;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Other Sections */
+        h2 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        h3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            transition: border-color 0.3s ease;
+        }
+
+        a:hover {
+            border-bottom-color: #fff;
+        }
+
+        /* Images: Overlayed on sections or as accents */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Table Styling: Adapted for dark theme */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+        /* Iframe: Full width with overlay */
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            margin: 1.5rem 0;
+            position: relative;
+            z-index: 3;
+        }
+
+        /* Specific Section Backgrounds */
+        .current-position {
+            background-image: url('CS_14_web.jpg'); /* Festival of Lights image */
+        }
+
+        .born-raised {
+            background-image: url('almatz_pic.jpeg'); /* Reuse Almaty for consistency */
+        }
+
+        .what-i-like {
+            background-image: url('IMG_8087 2.JPG'); /* Hiking image as bg */
+        }
+
+        .academic-journey {
+            background-image: url('airplane.JPG'); /* Mountains for journey theme */
+            min-height: auto; /* Shorter for table */
+            padding: 4rem 2rem;
+        }
+
+        /* Coffee subsection - lighter overlay */
+        .coffee-subsection::before {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            h3 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                min-height: auto;
+                padding: 2rem 1rem;
+                background-attachment: scroll; /* Better on mobile */
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+
+            iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="section-content">
+            <h1>Karina Azizova's Story</h1>
+
+        </div>
+        <div class="scroll-indicator">Scroll for more</div>
+    </section>
+
+    <!-- Current Position -->
+    <section class="current-position">
+        <div class="section-content">
+            <h2>Current Position</h2>
+            <p>Master Student at <a href="https://www.hwr-berlin.de/en/" target="_blank">Berlin School of Economics and Law</a></p>
+            <p><a href="https://www.linkedin.com/in/karina-azizova-461b53253/" target="_blank">LinkedIn Profile</a></p>
+            <img src="photo_2025-10-19 20.46.20.jpeg" alt="us during Festival of Lights" width="600">
+        </div>
+    </section>
+
+    <!-- Born and Raised -->
+    <section class="born-raised">
+        <div class="section-content">
+            <h2>Born and Raised</h2>
+            <p><a href="https://visitalmaty.kz/en/glavnayav2en/" target="_blank">Almaty, Kazakhstan</a></p>
+            <img src="Aport.jpg" alt="Almaty" width="400">
+            <img src="kz.jpg" alt="Almaty" width="400">
+        </div>
+    </section>
+
+   <!-- What I Like -->
+<section class="what-i-like">
+    <div class="section-content">
+        <h2>What I Like</h2>
+        <h3>Hiking and Trekking!!!</h3>
+        <div class="image-grid">
+            <img src="IMG_0001 2.JPG" alt="On my way to Peak Molodejnyi 4117" width="400">
+            <img src="photo_2025-10-19 22.10.56.jpeg" alt="Mountains in May 2025" width="400">
+            <img src="photo_2025-10-19 22.15.22.jpeg" alt="Bastai" width="400">
+        </div>
+    </div>
+</section>
+
+    <!-- Academic Journey -->
+    <section class="academic-journey">
+        <div class="section-content">
+            <h2>Academic Journey</h2>
+            <h3>Stops Along the Way</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Location</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2020-23</td>
+                        <td>Almaty, Kazakhstan</td>
+                        <td>Student at Deutsch-Kasachische Universität</td>
+                    </tr>
+                    <tr>
+                        <td>2023–24</td>
+                        <td>Wildau, Germany</td>
+                        <td>Student at TH Wildau</td>
+                    </tr>
+                    <tr>
+                        <td>2024–25</td>
+                        <td>Moscow, Russia</td>
+                        <td>SAP Consultant at msg Plaut</td>
+                    </tr>
+                    <tr>
+                        <td>2025–now</td>
+                        <td>Berlin, Germany</td>
+                        <td>Student at HWR</td>
+                    </tr>
+                </tbody>
+            </table>
+            <iframe src="academic_journey_map_K.html" width="800" height="600" style="border:none;"></iframe>
+        </div>
+    </section>
+</body>
+</html>
